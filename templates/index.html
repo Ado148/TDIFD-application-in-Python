@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TF-IDF analysis</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet"/>
+</head>
+<body>
+    <div class="container">
+        <h1>TF-IDF analysis</h1>
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="file" placeholder="Upload a text file" accept=".txt" required>
+            <button type="submit">Upload</button>
+        </form>
+        
+        {% if data is none %}
+            <p class="warning">File is not uploaded</p>
+        {% endif %}
+
+        {% if data %}
+            <h2>TF-IDF results</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Word</th>
+                        <th>TF</th>
+                        <th>IDF</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in data %}
+                    <tr>
+                        <td>{{ row.word }}</td>
+                        <td>{{ row.tf }}</td>
+                        <td>{{ row.idf }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+    </div>
+</body>
+</html>
